@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ACORD >
+	<Status>
+		<StatusCd>SystemError</StatusCd>
+		<StatusDesc>System error occurred. </StatusDesc>
+	</Status>
+	<InsuranceSvcRs>
+		<PersAutoPolicyQuoteInqRs>
+			<MsgStatus>
+				<MsgStatusCd>SystemError</MsgStatusCd>
+				<MsgStatusDesc>System error occurred. </MsgStatusDesc>
+				<ExtendedStatus>
+					<ExtendedStatusCd>SystemError</ExtendedStatusCd>
+					<ExtendedStatusDesc>PersAutoPolicyQuoteInqRq: Fault {http://www.csc.com/fsg/cfw/}communicationFailure: : com.csc.fw.util.FwException: Error retrieving transaction from envelope: Fault {http://www.csc.com/fsg/cfw/}communicationFailure: HTTP connection error. URL:http://170.30.16.80:8080/ptsvcs/servlet/PTBusinessServiceServlet?txnname=ALPT 
+Error Response: HTTP Status 404 – Not Foundh1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} h2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} h3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} body {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} b {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} p {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;} a {color:black;} a.name {color:black;} .line {height:1px;background-color:#525D76;border:none;}HTTP Status 404 – Not FoundType Status ReportMessage /ptsvcs/servlet/PTBusinessServiceServletDescription The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.Pivotal tc Runtime 3.2.8.RELEASE/8.5.23.A.RELEASE
+: java.io.FileNotFoundException: http://170.30.16.80:8080/ptsvcs/servlet/PTBusinessServiceServlet?txnname=ALPT
+</ExtendedStatusDesc>
+				</ExtendedStatus>
+				<ExtendedStatus>
+					<ExtendedStatusCd>UserError</ExtendedStatusCd>
+					<ExtendedStatusDesc>System error occurred. </ExtendedStatusDesc>
+				</ExtendedStatus>
+			</MsgStatus>
+		</PersAutoPolicyQuoteInqRs>
+	</InsuranceSvcRs>
+</ACORD>
+

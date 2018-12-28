@@ -2,8 +2,8 @@ const archiver = require('archiver')
 const getFolderSize = require('get-folder-size')
 const sizeof = require('object-sizeof')
 const path_parse = require('path-parse')
-
-
+const electron = require('electron')
+const shell = electron.shell
 
 
 // let progressbar_container = $('#progressbar_ctr')
@@ -44,9 +44,19 @@ let zipped_no = $('#zipped_no');
 let remain_no = $('#remain_no');
 
 // Modal
-
 let modal = $('#Modal')
 
+//Output Folder Link
+let output_folder_link = $('#outputfolder_link');
+let output_folder_sp = $('#outputfolder_link_sp');
+
+function update_outputFolder_(outputfolder){
+    
+    $(document).on('click','#outputfolder_link',(eve)=>{
+        shell.openItem(outputfolder);
+    })
+
+}
 
 function hide_maincontainer_pb() {
 
@@ -222,10 +232,12 @@ function output_Folder_Check(f){
     let system_drive = process.env.systemdrive;
     let username = process.env.username;
     let client_mc_desktop_path = path.normalize(system_drive+"\\Users\\"+username+"\\Desktop\\Zipped_Output_Folder");
+    update_outputFolder_(client_mc_desktop_path);
     if(!(fs.existsSync(client_mc_desktop_path))){
-        if(!(f)){
-            if(!(fs.existsSync(path.join(client_mc_desktop_path,f)))){
-                fs.mkdirSync(path.join(client_mc_desktop_path, f));
+        if(f){
+           var a =  path.join(client_mc_desktop_path,f)
+            if(!(fs.existsSync(a))){
+                fs.mkdirSync(a);
             }
         }
         else{
@@ -244,10 +256,16 @@ function zip(src_zip_file, srcfile_folder) {
     return new Promise((resolve, reject) => {
         let filesize = 0
         let filename = path_parse(src_zip_file).name;
-        let foldername = path_parse(srcfile_folder).name;
-        let output_Folder = output_Folder_Check(foldername);
 
-        const output_dir = path.join(output_Folder,filename + '.zip')
+        if(srcfile_folder){
+
+            let foldername = path_parse(srcfile_folder).name;
+            let output_Folder = output_Folder_Check(foldername);
+        }else{
+            let output_Folder = output_Folder_Check();
+        }
+
+        const output_dir = path.join(output_Folder,filename + '.zip');
 
         // container_gridrow.fadeIn();
 
@@ -382,9 +400,21 @@ function zipdir(srcdir, srcdir_folder) {
             // percentage_container.fadeIn()
 
             // container_gridrow.fadeIn();
-            let output_Folder = output_Folder_Check();
+            let output_Folder;
+
+            let filename = path_parse(srcdir).name;
+            if(srcdir_folder){
+
+                let foldername = path_parse(srcdir_folder).name;
+                output_Folder = output_Folder_Check(foldername);
+            }else{
+                output_Folder = output_Folder_Check();
+            }
             
-            var outputStream = fs.createWriteStream(path.join(output_Folder, path_parse(srcdir).name + '.zip'));
+            
+
+            let output_dir = path.join(output_Folder, filename + '.zip');
+            let outputStream = fs.createWriteStream(output_dir);
 
             var archivedir = archiver('zip', {
                 zlib: { level: 9 }
