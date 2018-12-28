@@ -257,12 +257,14 @@ function zip(src_zip_file, srcfile_folder) {
         let filesize = 0
         let filename = path_parse(src_zip_file).name;
 
+        let output_Folder;
+
         if(srcfile_folder){
 
             let foldername = path_parse(srcfile_folder).name;
-            let output_Folder = output_Folder_Check(foldername);
+            output_Folder = output_Folder_Check(foldername);
         }else{
-            let output_Folder = output_Folder_Check();
+            output_Folder = output_Folder_Check();
         }
 
         const output_dir = path.join(output_Folder,filename + '.zip');
@@ -278,7 +280,7 @@ function zip(src_zip_file, srcfile_folder) {
         }
 
         let filesize_promise = new Promise((resolve, reject) => {
-            getFolderSize(src_zip_folder, function (err, size) {
+            getFolderSize(src_zip_file, function (err, size) {
                 resolve(size);
             })
         })
@@ -309,7 +311,7 @@ function zip(src_zip_file, srcfile_folder) {
                 return ((bytes / 1024) / 1024);
             }
 
-            switch (fs.statSync(src_zip_folder).isDirectory()) {
+            switch (fs.statSync(src_zip_file).isDirectory()) {
 
                 case true: archive.directory(src_zip_file, false);
                     break;
@@ -333,7 +335,7 @@ function zip(src_zip_file, srcfile_folder) {
             })
 
             output.on('finish', function () {
-                console.log(src_zip_folder + ' zipped ---- ' + percentage + ' % complete \r');
+                console.log(src_zip_file + ' zipped ---- ' + percentage + ' % complete \r');
                 updateProgress(percentage.toFixed(0));
             });
 
@@ -476,10 +478,11 @@ async function zipSplitZipContent(srcMain) {
 
         if (fs.statSync(filepath).isDirectory()) {
 
-            await zipdir(filepath, src_folder);
+            await zipdir(filepath, srcMain);
         }
         else {
-            await zip(filepath, src_folder);
+
+            await zip(filepath, srcMain);
         }
 
         // await container_gridrow.css('display','none');
@@ -503,12 +506,18 @@ async function splitZip_Selected() {
         for (var file in selected_rows) {
 
             await console.log('Row No : ' + (file + 1) + ' || Path : ' + selected_rows[file].path);
-            await zipSplitZipContent(selected_rows[file].path);
+           if(fs.statSync(selected_rows[file].path).isDirectory()){
+                await zipSplitZipContent(selected_rows[file].path);
+           }
+           else{
+                await zip(selected_rows[file.path]);
+           }
             zipped_no.text(file + 1);
             remain_no.text(selected_rows.length - (file + 1));
         }
-        endzip_ui();
-        resetInformationbar_values();
+        await endzip_ui();
+        await modal.modal('show');
+        await resetInformationbar_values();
         selected_rows.length = 0;
         await console.log('All Files ar Split-Zipped: Current Values in Selected Rows  : ' + selected_rows.toString())
     }
