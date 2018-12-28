@@ -1,0 +1,63 @@
+.progressbar{
+    margin: 0px;
+    padding: 0px;
+    font-size: 12px;
+    color: lightslategray;
+    padding: 5px;
+}
+
+.progressbar_col{
+    padding: 5px;
+    /* border: 0.5px solid lightgray; */
+}
+.progressbar_row_2{
+    margin: 0px;
+    padding: 0px;
+    padding-top: 2px;
+    font-style: italic;
+}
+.progressbar_row{
+    padding: 0px;
+    margin: 0px;
+    height: 27px;
+}
+#queue, #zipped{
+    margin: 0px;
+    font-size: 11px;
+    padding-left: 15px;
+}
+.col_prog_bar{
+    padding: 0px;
+}
+
+.progressbar_grid{
+    padding: 6px;
+}
+#zip_header{
+    text-align: center;
+    /* display: none; */
+}
+
+.progress{
+    height: 3px;
+    /* display: none; */
+}
+
+#progressbar_cl{
+    padding-top: 15px;
+}
+#progressbar_ctr{
+    /* display: none; */
+}
+#progress_bar_progress{
+    width: '0%';
+    
+}
+
+#percentage_container{
+    /* display: none; */
+}
+
+.grid.progressbar_grid{
+    /* display: none; */
+}

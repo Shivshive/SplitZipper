@@ -1,0 +1,47 @@
+.container-progress-bar{
+    /* border: 1px solid black; */
+    padding: 0px;
+    margin: 0px;
+}
+
+.bd-highlight{
+    /* background-color: lightgray;
+    border: 0.5px solid darkblue; */
+}
+
+.flex_item{
+    color: slategray;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.progress{
+    height: 13px;
+}
+
+.filename{
+    font-size: 10px;
+}
+
+.flex-row{
+    margin: 0px;
+}
+
+#p_b_ctrl{
+    padding-left: 36px;
+    padding-right: 36px;   
+}
+
+#information_bar_container{
+    padding-top: 4px;
+    border-top: 0.5px solid lightgray;
+}
+.progress-bar{
+    font-size: 8px;
+}
+
+#zip_complete_container{
+    color: red;
+    font-style: italic;
+    z-index: 100;
+}

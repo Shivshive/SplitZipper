@@ -1,0 +1,20 @@
+.grid{
+    
+}
+
+.grid-header{
+    display: flex;
+    font-weight: 900;
+}
+
+.grid-body{
+   
+    padding-top: 10px;
+}
+
+.grid-row{
+    display: flex;
+}
+.grid-item{
+    flex: 1;
+}

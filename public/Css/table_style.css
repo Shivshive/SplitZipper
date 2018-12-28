@@ -1,0 +1,102 @@
+* {margin:0;padding:0; border: 0 none; position: relative;}
+*, *:before, *:after {box-sizing: inherit;}
+
+html{
+    box-sizing: border-box;
+}
+
+table{
+    width: 100%;
+}
+
+thead{
+    z-index: 2;
+    text-align: center;
+    background-color: olivedrab
+}
+thead tr {
+    z-index: 2;
+    padding-right: 15px;
+}
+
+
+thead tr td{
+    border: none;
+}
+
+tbody{
+    display: block;
+    height: 275px;
+    overflow-y: scroll;
+    
+}
+
+tr {
+    display: block;
+    overflow: hidden;
+  }
+
+  tbody tr{
+      margin-bottom: 5px;
+      margin-top: 5px;
+      border-bottom: 0.5px solid lightgoldenrodyellow;
+  }
+
+
+
+  /* .checkbox_fld{
+      width: 20%;
+  }
+
+  .file_size_fld{
+      width: 30%;
+  }
+
+  .file_name_fld{
+      width: 50%;
+  }
+   */
+  th, td {
+    width: 20%;
+    float:left;
+    text-align: center;
+    /* border: 0.5px solid lightgray; */
+  }
+
+  .checkbox_fld_hd {
+      width: 20%;
+  }
+  .checkbox_fld_hd_{
+    width: 20%;
+  }
+  .filename_fld_hd{
+      width: 60%;
+  }
+
+  .filename_fld_hd_{
+    width: 60%;
+    text-align: left;
+  }
+  .size_fld_hd{
+      width: 20%;
+  }
+
+  .size_fld_hd_{
+    width: 20%;
+    text-align: right;
+  }
+  .container{
+      margin: 50px;
+
+  }
+
+  tbody{
+      font-size: 11px;
+  }
+
+
+  input[type="checkbox"]{
+      border: 0.5px solid lightgray;
+      padding: 5px;
+      
+  }
