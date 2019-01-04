@@ -4,6 +4,7 @@ const sizeof = require('object-sizeof')
 const path_parse = require('path-parse')
 const electron = require('electron')
 const shell = electron.shell
+const renderer = require('electron').ipcRenderer
 
 
 // let progressbar_container = $('#progressbar_ctr')
@@ -212,6 +213,7 @@ async function zipFolder() {
         await endzip_ui();
         await modal.modal('show');
         await resetInformationbar_values();
+        renderer.send('notify');
         // await waitFor(2000);      
     }
 
@@ -520,6 +522,7 @@ async function splitZip_Selected() {
         await resetInformationbar_values();
         selected_rows.length = 0;
         await console.log('All Files ar Split-Zipped: Current Values in Selected Rows  : ' + selected_rows.toString())
+        renderer.send('notify');
     }
 
 }
