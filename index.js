@@ -7,7 +7,7 @@ const path = require('path');
   
   function createWindow () {
     // Create the browser window.
-    win = new BrowserWindow({ width: 700, height: 680, frame: true, resizable: false, icon: path.join(__dirname,"public","img","icon.ico") })
+    win = new BrowserWindow({ width: 700, height: 750, frame: true, resizable: false, icon: path.join(__dirname,"public","img","icon.ico") })
     
     Menu.setApplicationMenu(null);
 
