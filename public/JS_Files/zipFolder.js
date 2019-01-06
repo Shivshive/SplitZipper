@@ -212,7 +212,7 @@ async function zipFolder() {
             // await $('.progress-bar').css('width', '0%').attr('aria-valuenow', 0);
             // await percentage_header.text('0');
             await updateProgress(0);
-            await waitFor(2000);
+            await waitFor(1500);
         }
 
         selected_rows.length = 0;
@@ -363,7 +363,7 @@ function zip(src_zip_file, srcfile_folder) {
             });
 
             output.on('close', () => {
-                waitFor(2000).then((t) => {
+                waitFor(1500).then((t) => {
                     if (!(progress_bar.hasClass('invisible'))) {
                         progress_bar.addClass('invisible');
                         file_name_container.addClass('invisible');
@@ -467,7 +467,7 @@ function zipdir(srcdir, srcdir_folder) {
                 console.log('Zipped  - ' + srcdir);
                 console.log('Total Files Processed : -- ' + entry.entries.processed);
 
-                waitFor(2000).then((t) => {
+                waitFor(1500).then((t) => {
 
                     if (!(progress_bar.hasClass('invisible'))) {
                         progress_bar.addClass('invisible');
@@ -512,7 +512,7 @@ async function zipSplitZipContent(srcMain) {
         // await $('.progress-bar').css('width', '0%').attr('aria-valuenow', 0);
         // await percentage_header.text('0');
         await updateProgress(0);
-        await waitFor(2000);
+        await waitFor(1500);
     }
 
     return true;

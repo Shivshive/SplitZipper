@@ -1,0 +1,16 @@
+               || ॐ नम: शिवाय ||
+
+SplitZipper is a zipping tool developed in Node and ElectronJS.
+
+## It provides functionalities as given below --
+
+# - SplitZip, hereby splitzip defines that zipping each file/directory within source directory.
+# - Zip Folders.
+
+Product Owner : Rishi Pandya (Shiv)
+
+## - Copyright Information -- 
+# Products copyright is protected to Rishi Pandya (Shiv).
+# Product is allowed for commercial or non-commercial (personal) use as per allowed by Product Owner.
+
+Copyright © 2018 Rishi Pandya (Shiv) https://github.com/Shivshive/SplitZipper

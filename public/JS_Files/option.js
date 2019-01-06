@@ -213,10 +213,10 @@ function convertToMegaByte(bytes) {
     let filesize = {}
 
     if (mb) {
-        filesize.size = mb + ' MB'
+        filesize.size = mb.toFixed(2) + ' MB'
     }
     else {
-        filesize.size = kb + ' KB'
+        filesize.size = kb.toFixed(2) + ' KB'
     }
 
     return filesize;

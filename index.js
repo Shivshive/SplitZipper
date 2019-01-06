@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu } = require('electron')
+const { app, BrowserWindow, Menu, globalShortcut } = require('electron')
 const path = require('path');
 const ipcMain = require('electron').ipcMain
 
@@ -15,8 +15,12 @@ function createWindow() {
   // and load the index.html of the app.
   win.loadFile('index.html')
 
-  // Open the DevTools.
-  win.webContents.openDevTools({ detach: true })
+
+  globalShortcut.register('Control+Shift+i', () => {
+    // Open the DevTools.
+    win.webContents.openDevTools({ detach: true })
+  })
+
 
   // Emitted when the window is closed.
   win.on('closed', () => {
@@ -38,7 +42,7 @@ app.on('window-all-closed', () => {
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   // if (process.platform !== 'darwin') {
-    app.quit()
+  app.quit()
   // }
 })
 
