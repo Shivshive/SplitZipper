@@ -1,4 +1,4 @@
-               || ॐ नम: शिवाय ||
+               || Om Namah Shivay ||
 
 SplitZipper is a zipping tool developed in Node and ElectronJS.
 
