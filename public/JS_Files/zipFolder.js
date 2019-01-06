@@ -198,8 +198,15 @@ async function zipFolder() {
 
             console.log(selected_rows[file].path);
             // await zip(selected_rows[0].path);
-            await zipdir(selected_rows[file].path);
-            zipped_no.text(file + 1);
+
+            if(fs.statSync(selected_rows[file].path).isDirectory()){
+                await zipdir(selected_rows[file].path);
+            }
+            else{
+                await zip(selected_rows[file].path);
+            }
+            let zip_no = (file + 1);
+            zipped_no.text(zip_no);
             remain_no.text(selected_rows.length - (file + 1));
             // await container_gridrow.css('display','none');
             // await $('.progress-bar').css('width', '0%').attr('aria-valuenow', 0);
@@ -235,17 +242,31 @@ function output_Folder_Check(f){
     let username = process.env.username;
     let client_mc_desktop_path = path.normalize(system_drive+"\\Users\\"+username+"\\Desktop\\Zipped_Output_Folder");
     update_outputFolder_(client_mc_desktop_path);
-    if(!(fs.existsSync(client_mc_desktop_path))){
-        if(f){
-           var a =  path.join(client_mc_desktop_path,f)
-            if(!(fs.existsSync(a))){
-                fs.mkdirSync(a);
-            }
-        }
-        else{
-            fs.mkdirSync(path.join(client_mc_desktop_path));
-        }
+    // if(!(fs.existsSync(client_mc_desktop_path))){
+    //     if(f){
+    //        var a =  path.join(client_mc_desktop_path,f)
+    //         if(!(fs.existsSync(a))){
+    //             fs.mkdirSync(a);
+    //         }
+    //     }
+    //     else{
+    //         fs.mkdirSync(path.join(client_mc_desktop_path));
+    //     }
 
+    // }
+
+
+    if(!(fs.existsSync(client_mc_desktop_path))){
+        fs.mkdirSync(client_mc_desktop_path)
+    }
+
+    if(f){
+        
+        client_mc_desktop_path = path.normalize(path.join(client_mc_desktop_path,f))
+
+        if(!(fs.existsSync(client_mc_desktop_path))){
+            fs.mkdirSync(client_mc_desktop_path)
+        }
     }
 
     return client_mc_desktop_path;
@@ -514,7 +535,8 @@ async function splitZip_Selected() {
            else{
                 await zip(selected_rows[file.path]);
            }
-            zipped_no.text(file + 1);
+           let zip_no = (file + 1);
+            zipped_no.text(zip_no);
             remain_no.text(selected_rows.length - (file + 1));
         }
         await endzip_ui();
@@ -526,7 +548,6 @@ async function splitZip_Selected() {
     }
 
 }
-
 
 
 module.exports = hide_zip_complete_container;
