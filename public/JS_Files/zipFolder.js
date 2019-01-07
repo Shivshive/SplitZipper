@@ -51,9 +51,9 @@ let modal = $('#Modal')
 let output_folder_link = $('#outputfolder_link');
 let output_folder_sp = $('#outputfolder_link_sp');
 
-function update_outputFolder_(outputfolder){
-    
-    $(document).on('click','#outputfolder_link',(eve)=>{
+function update_outputFolder_(outputfolder) {
+
+    $(document).on('click', '#outputfolder_link', (eve) => {
         shell.openItem(outputfolder);
     })
 
@@ -188,7 +188,7 @@ let percentage = 0;
 
 async function zipFolder() {
 
-    if (selected_rows) {
+    if (selected_rows.length > 0) {
 
         console.log('No of rows selected : ' + selected_rows)
         await startzip_ui();
@@ -199,14 +199,15 @@ async function zipFolder() {
             console.log(selected_rows[file].path);
             // await zip(selected_rows[0].path);
 
-            if(fs.statSync(selected_rows[file].path).isDirectory()){
+            if (fs.statSync(selected_rows[file].path).isDirectory()) {
                 await zipdir(selected_rows[file].path);
             }
-            else{
+            else {
                 await zip(selected_rows[file].path);
             }
-            let zip_no = (file + 1);
-            zipped_no.text(zip_no);
+
+            zipped_no.text('');
+            zipped_no.text(file + 1);
             remain_no.text(selected_rows.length - (file + 1));
             // await container_gridrow.css('display','none');
             // await $('.progress-bar').css('width', '0%').attr('aria-valuenow', 0);
@@ -223,6 +224,9 @@ async function zipFolder() {
         renderer.send('notify');
         // await waitFor(2000);      
     }
+    else{
+        console.log('Nothing selected...');
+    }
 
 }
 
@@ -237,10 +241,10 @@ function waitFor(t) {
 }
 
 
-function output_Folder_Check(f){
+function output_Folder_Check(f) {
     let system_drive = process.env.systemdrive;
     let username = process.env.username;
-    let client_mc_desktop_path = path.normalize(system_drive+"\\Users\\"+username+"\\Desktop\\Zipped_Output_Folder");
+    let client_mc_desktop_path = path.normalize(system_drive + "\\Users\\" + username + "\\Desktop\\Zipped_Output_Folder");
     update_outputFolder_(client_mc_desktop_path);
     // if(!(fs.existsSync(client_mc_desktop_path))){
     //     if(f){
@@ -256,15 +260,15 @@ function output_Folder_Check(f){
     // }
 
 
-    if(!(fs.existsSync(client_mc_desktop_path))){
+    if (!(fs.existsSync(client_mc_desktop_path))) {
         fs.mkdirSync(client_mc_desktop_path)
     }
 
-    if(f){
-        
-        client_mc_desktop_path = path.normalize(path.join(client_mc_desktop_path,f))
+    if (f) {
 
-        if(!(fs.existsSync(client_mc_desktop_path))){
+        client_mc_desktop_path = path.normalize(path.join(client_mc_desktop_path, f))
+
+        if (!(fs.existsSync(client_mc_desktop_path))) {
             fs.mkdirSync(client_mc_desktop_path)
         }
     }
@@ -282,15 +286,15 @@ function zip(src_zip_file, srcfile_folder) {
 
         let output_Folder;
 
-        if(srcfile_folder){
+        if (srcfile_folder) {
 
             let foldername = path_parse(srcfile_folder).name;
             output_Folder = output_Folder_Check(foldername);
-        }else{
+        } else {
             output_Folder = output_Folder_Check();
         }
 
-        const output_dir = path.join(output_Folder,filename + '.zip');
+        const output_dir = path.join(output_Folder, filename + '.zip');
 
         // container_gridrow.fadeIn();
 
@@ -428,15 +432,15 @@ function zipdir(srcdir, srcdir_folder) {
             let output_Folder;
 
             let filename = path_parse(srcdir).name;
-            if(srcdir_folder){
+            if (srcdir_folder) {
 
                 let foldername = path_parse(srcdir_folder).name;
                 output_Folder = output_Folder_Check(foldername);
-            }else{
+            } else {
                 output_Folder = output_Folder_Check();
             }
-            
-            
+
+
 
             let output_dir = path.join(output_Folder, filename + '.zip');
             let outputStream = fs.createWriteStream(output_dir);
@@ -520,7 +524,7 @@ async function zipSplitZipContent(srcMain) {
 
 async function splitZip_Selected() {
 
-    if (selected_rows) {
+    if (selected_rows.length > 0) {
 
         await console.log('No of rows selected : ' + selected_rows.length)
         startzip_ui();
@@ -529,15 +533,14 @@ async function splitZip_Selected() {
         for (var file in selected_rows) {
 
             await console.log('Row No : ' + (file + 1) + ' || Path : ' + selected_rows[file].path);
-           if(fs.statSync(selected_rows[file].path).isDirectory()){
+            if (fs.statSync(selected_rows[file].path).isDirectory()) {
                 await zipSplitZipContent(selected_rows[file].path);
-           }
-           else{
-                await zip(selected_rows[file.path]);
-           }
-           let zip_no = (file + 1);
-            zipped_no.text(zip_no);
-            remain_no.text(selected_rows.length - (file + 1));
+            }
+            else {
+                await zip(selected_rows[file].path);
+            }
+            zipped_no.text((parseInt(file) + 1));
+            remain_no.text((selected_rows.length - (parseInt(file) + 1)));
         }
         await endzip_ui();
         await modal.modal('show');
